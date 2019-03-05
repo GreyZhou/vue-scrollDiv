@@ -167,10 +167,10 @@
 				let main = this.$refs.scroll;
 
 				// 移植padding
-				let padd_top = this.$func.getStyle(wrap,'padding-top');
-				let padd_right = this.$func.getStyle(wrap,'padding-right');
-				let padd_bottom = this.$func.getStyle(wrap,'padding-bottom');
-				let padd_left = this.$func.getStyle(wrap,'padding-left');
+				let padd_top = this.getStyle(wrap,'padding-top');
+				let padd_right = this.getStyle(wrap,'padding-right');
+				let padd_bottom = this.getStyle(wrap,'padding-bottom');
+				let padd_left = this.getStyle(wrap,'padding-left');
 				wrap.style['padding'] = 0;
 				main.style['padding'] = `${padd_top} ${padd_right} ${padd_bottom} ${padd_left}`;
 			},
@@ -326,7 +326,7 @@
 					this.bar[key].show = per<100;  
 				}
 
-				// console.log(this.$func.getStyle(this.$refs.scroll,'height'))
+				// console.log(this.getStyle(this.$refs.scroll,'height'))
 				// 内容 不足 容器
 				if(key == 'Y' && per > 100){
 					this.$refs.scroll.style.height = wrap_size + 'px';
@@ -456,6 +456,14 @@
 			getOrigin(element,key = 'Y'){
 				let word = key == 'Y'?'top':'left';
 				return element.getBoundingClientRect()[word];
+			},
+			// 获取CSS属性
+			getStyle(element, attr) {
+			    if(element.currentStyle) {
+			        return element.currentStyle[attr];
+			    } else {
+			        return getComputedStyle(element, false)[attr];
+			    }
 			},
 
 		}
